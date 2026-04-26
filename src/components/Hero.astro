@@ -1,0 +1,341 @@
+---
+---
+
+<section class="hero" id="hero">
+
+    <div class="hero__identity">
+        <h1 class="hero__name">Timothé Pecnard</h1>
+    </div>
+
+    <div class="hero__content">
+        <p class="hero__desc">
+            Développeur de formation, attiré par le design et la création graphique.
+            Ce qui me passionne ? L'idée qu'on peut tout concevoir soi-même,
+            du code à l'image, de la structure à l'émotion.
+        </p>
+    </div>
+
+    <div class="hero__cards">
+        <div class="hero__cards-track">
+
+            <article class="hero__card is-active" data-index="0" style="--card-color: #00e5ff;">
+                <div class="hero__card-top">
+                    <span class="hero__card-num">01</span>
+                    <span class="hero__card-tag">IoT</span>
+                </div>
+                <div class="hero__card-content">
+                    <h3 class="hero__card-title">Dashboard<br>IoT</h3>
+                    <p class="hero__card-desc">Interface de monitoring temps réel avec visualisation de données interactives.</p>
+                </div>
+                <div class="hero__card-bottom">
+                    <span class="hero__card-tech">React · D3.js · UX</span>
+                    <span class="hero__card-arrow">↗</span>
+                </div>
+            </article>
+
+            <article class="hero__card" data-index="1" style="--card-color: #ff6b00;">
+                <div class="hero__card-top">
+                    <span class="hero__card-num">02</span>
+                    <span class="hero__card-tag">E-commerce</span>
+                </div>
+                <div class="hero__card-content">
+                    <h3 class="hero__card-title">Plateforme<br>E-commerce</h3>
+                    <p class="hero__card-desc">Site e-commerce complet avec dashboard vendeur et gestion des commandes.</p>
+                </div>
+                <div class="hero__card-bottom">
+                    <span class="hero__card-tech">React · Node.js · UX</span>
+                    <span class="hero__card-arrow">↗</span>
+                </div>
+            </article>
+
+            <article class="hero__card" data-index="2" style="--card-color: #aaff00;">
+                <div class="hero__card-top">
+                    <span class="hero__card-num">03</span>
+                    <span class="hero__card-tag">Motion</span>
+                </div>
+                <div class="hero__card-content">
+                    <h3 class="hero__card-title">Motion<br>Design</h3>
+                    <p class="hero__card-desc">Explorations motion design sur After Effects — animations et direction artistique.</p>
+                </div>
+                <div class="hero__card-bottom">
+                    <span class="hero__card-tech">After Effects · Lottie</span>
+                    <span class="hero__card-arrow">↗</span>
+                </div>
+            </article>
+
+            <article class="hero__card" data-index="3" style="--card-color: #c4b5f4;">
+                <div class="hero__card-top">
+                    <span class="hero__card-num">04</span>
+                    <span class="hero__card-tag">Branding</span>
+                </div>
+                <div class="hero__card-content">
+                    <h3 class="hero__card-title">Brand<br>Identity</h3>
+                    <p class="hero__card-desc">Création d'identités visuelles complètes — logo, typographie, charte graphique.</p>
+                </div>
+                <div class="hero__card-bottom">
+                    <span class="hero__card-tech">Illustrator · Figma</span>
+                    <span class="hero__card-arrow">↗</span>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="hero__cards-progress">
+            <div class="hero__cards-bar" id="cardsBar"></div>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 120px 48px 0;
+        overflow: hidden;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.2; }
+    }
+
+    .hero__identity {
+        position: absolute;
+        top: 80px;
+        left: 48px;
+        z-index: 2;
+    }
+
+    .hero__name {
+        font-family: var(--font-display);
+        font-size: clamp(16px, 3.5vw, 40px);
+        font-weight: 600;
+        text-transform: capitalize;
+        letter-spacing: -0.02em;
+        color: var(--color-text);
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    /* CONTENT */
+    .hero__content {
+        position: absolute;
+        left: 48px;
+        right: 48px;
+        top: 30%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        z-index: 2;
+    }
+
+    .hero__desc {
+        font-size: 15px;
+        line-height: 1.4;
+        color: var(--color-text);
+        max-width: 500px;
+    }
+
+    .hero__cards {
+        position: absolute;
+        right: 48px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 280px;
+        z-index: 2;
+    }
+
+    .hero__cards-track {
+        position: relative;
+        height: 320px;
+    }
+
+    .hero__card {
+        position: absolute;
+        inset: 0;
+        border: 0.5px solid var(--color-border);
+        border-radius: 8px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateX(40px);
+        transition: opacity 0.6s var(--ease-out),
+        transform 0.6s var(--ease-out),
+        border-color 0.4s,
+        background 0.4s;
+        pointer-events: none;
+    }
+
+    .hero__card.is-active {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+        background: color-mix(in srgb, var(--card-color) 4%, #000);
+        border-color: color-mix(in srgb, var(--card-color) 20%, transparent);
+    }
+
+    .hero__card.is-leaving {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    .hero__card:hover {
+        border-color: color-mix(in srgb, var(--card-color) 50%, transparent);
+    }
+
+    .hero__card-num {
+        font-family: var(--font-display);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--card-color);
+        letter-spacing: 0.1em;
+    }
+
+    .hero__card-tag {
+        font-size: 10px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--card-color);
+        border: 0.5px solid color-mix(in srgb, var(--card-color) 40%, transparent);
+        padding: 4px 10px;
+        border-radius: 20px;
+        opacity: 0.8;
+    }
+
+    .hero__card-title {
+        font-family: var(--font-display);
+        font-size: 36px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        line-height: 0.92;
+        color: var(--color-text);
+        margin-bottom: 12px;
+        transition: color 0.3s;
+    }
+
+    .hero__card:hover .hero__card-title {
+        color: var(--card-color);
+    }
+
+    .hero__card-desc {
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--color-text-muted);
+    }
+
+    .hero__card-tech {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+    }
+
+    .hero__card-arrow {
+        font-size: 16px;
+        color: var(--card-color);
+        opacity: 0.6;
+        transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .hero__card:hover .hero__card-arrow {
+        opacity: 1;
+        transform: translate(2px, -2px);
+    }
+
+    .hero__cards-bar {
+        height: 100%;
+        background: var(--card-color, rgba(255,255,255,0.4));
+        border-radius: 1px;
+        width: 0%;
+        transition: width 0.1s linear, background 0.6s;
+    }
+
+</style>
+
+<script>
+    import gsap from 'gsap';
+
+    gsap.to('.hero__name', {
+        opacity: 1,
+        translateY: 0,
+        duration: 1,
+        ease: 'power3.out',
+        delay: 0.5,
+    });
+
+    gsap.from('.hero__meta, .hero__desc, .hero__nav-tag, .hero__nav-status', {
+        opacity: 0,
+        translateY: 20,
+        duration: 1,
+        stagger: 0.08,
+        ease: 'power3.out',
+        delay: 0.8,
+    });
+
+    // Cards rotatives
+    const cards = document.querySelectorAll('.hero__card');
+    const cardsBar = document.getElementById('cardsBar');
+    const CARD_DURATION = 5000;
+    let currentCard = 0;
+    let startTime = null;
+    let rafId = null;
+
+    function showCard(idx) {
+        const color = cards[idx].style.getPropertyValue('--card-color');
+        cardsBar.style.background = color;
+
+        cards.forEach(c => {
+            if (c.classList.contains('is-active')) {
+                c.classList.add('is-leaving');
+                setTimeout(() => c.classList.remove('is-active', 'is-leaving'), 600);
+            }
+        });
+
+        setTimeout(() => {
+            cards[idx].classList.add('is-active');
+        }, 100);
+    }
+
+    // Init couleur barre
+    const initColor = cards[0].style.getPropertyValue('--card-color');
+    cardsBar.style.background = initColor;
+
+    function animateBar(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min((elapsed / CARD_DURATION) * 100, 100);
+        cardsBar.style.width = progress + '%';
+
+        if (elapsed >= CARD_DURATION) {
+            currentCard = (currentCard + 1) % cards.length;
+            showCard(currentCard);
+            startTime = timestamp;
+        }
+
+        rafId = requestAnimationFrame(animateBar);
+    }
+
+    // Pause au hover
+    document.querySelector('.hero__cards').addEventListener('mouseenter', () => {
+        cancelAnimationFrame(rafId);
+    });
+
+    document.querySelector('.hero__cards').addEventListener('mouseleave', () => {
+        startTime = null;
+        rafId = requestAnimationFrame(animateBar);
+    });
+
+    showCard(0);
+    rafId = requestAnimationFrame(animateBar);
+</script>

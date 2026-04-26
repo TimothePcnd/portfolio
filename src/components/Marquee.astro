@@ -1,0 +1,56 @@
+---
+const items = [
+    'Astro', 'GSAP', 'Figma', 'Motion Design',
+    'UI · UX', 'Lenis', 'After Effects', 'CSS',
+    'Clash Display', 'Design System', 'Branding',
+];
+---
+
+<div class="marquee">
+    <div class="marquee__inner">
+        {items.map(item => (
+                <span class="marquee__item">{item}</span>
+                <span class="marquee__sep">/</span>
+        ))}
+        {items.map(item => (
+                <span class="marquee__item">{item}</span>
+                <span class="marquee__sep">/</span>
+        ))}
+    </div>
+</div>
+
+<style>
+    .marquee {
+        width: 100%;
+        overflow: hidden;
+        border-top: 0.5px solid var(--color-border);
+        border-bottom: 0.5px solid var(--color-border);
+        padding: 14px 0;
+        white-space: nowrap;
+    }
+
+    .marquee__inner {
+        display: inline-flex;
+        align-items: center;
+        gap: 0;
+        animation: marquee 20s linear infinite;
+    }
+
+    .marquee__item {
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        padding: 0 20px;
+    }
+
+    .marquee__sep {
+        color: var(--color-border);
+        font-size: 12px;
+    }
+
+    @keyframes marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+</style>

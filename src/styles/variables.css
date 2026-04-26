@@ -1,0 +1,23 @@
+:root {
+    /* Couleurs */
+    --color-bg: #000000;
+    --color-text: #f0f0f0;
+    --color-text-muted: rgba(240, 240, 240, 0.35);
+    --color-border: rgba(240, 240, 240, 0.08);
+    --color-accent: #ffffff;
+
+    /* Typographie */
+    --font-display: 'Clash Display', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Espacements */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 32px;
+    --space-lg: 64px;
+    --space-xl: 120px;
+
+    /* Transitions */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+}

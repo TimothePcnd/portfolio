@@ -1,0 +1,134 @@
+---
+---
+
+<section class="about" id="about">
+    <div class="about__index">
+        <span>01</span>
+    </div>
+
+    <div class="about__content">
+        <h2 class="about__title">
+            À propos<br>
+            de <em>moi</em>
+        </h2>
+
+        <div class="about__grid">
+            <p class="about__text">
+                Dev en transition vers le design, je construis des interfaces
+                à la croisée du code et de la direction artistique.
+                Chaque projet est une expérience — pas juste un livrable.
+            </p>
+
+            <div class="about__facts">
+                <div class="about__fact">
+                    <span class="about__fact-label">Formation</span>
+                    <span class="about__fact-value">DWWM · MMI</span>
+                </div>
+                <div class="about__fact">
+                    <span class="about__fact-label">Spécialité</span>
+                    <span class="about__fact-value">UX · Motion</span>
+                </div>
+                <div class="about__fact">
+                    <span class="about__fact-label">Stack</span>
+                    <span class="about__fact-value">Astro · GSAP</span>
+                </div>
+                <div class="about__fact">
+                    <span class="about__fact-label">Dispo</span>
+                    <span class="about__fact-value is-accent">2025</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .about {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        border-top: 0.5px solid var(--color-border);
+        padding: var(--space-xl) 0;
+    }
+
+    .about__index {
+        padding: 0 var(--space-md);
+        border-right: 0.5px solid var(--color-border);
+        display: flex;
+        align-items: flex-start;
+        padding-top: 6px;
+    }
+
+    .about__index span {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        color: var(--color-text-muted);
+        writing-mode: vertical-rl;
+        text-transform: uppercase;
+    }
+
+    .about__content {
+        padding: 0 48px;
+    }
+
+    .about__title {
+        font-family: var(--font-display);
+        font-size: clamp(48px, 7vw, 96px);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        line-height: 0.9;
+        color: var(--color-text);
+        margin-bottom: var(--space-lg);
+    }
+
+    .about__title em {
+        font-style: italic;
+        color: var(--color-text-muted);
+    }
+
+    .about__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg);
+        align-items: start;
+    }
+
+    .about__text {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--color-text-muted);
+        max-width: 380px;
+    }
+
+    .about__facts {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about__fact {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 16px 0;
+        border-bottom: 0.5px solid var(--color-border);
+    }
+
+    .about__fact-label {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+    }
+
+    .about__fact-value {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: var(--color-text);
+    }
+
+    .about__fact-value.is-accent {
+        color: var(--color-text-muted);
+    }
+</style>

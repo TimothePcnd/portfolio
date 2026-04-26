@@ -1,0 +1,193 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'Portfolio — Dev & Designer' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio — Développeur & Designer" />
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <!-- Curseur custom -->
+    <div id="cursor"></div>
+
+    <div id="clock-indicator">
+        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cercle de fond -->
+            <circle cx="30" cy="30" r="26"
+                    stroke="rgba(255,255,255,0.06)"
+                    stroke-width="0.5"/>
+
+            <!-- Arc de progression scroll -->
+            <circle cx="30" cy="30" r="26"
+                    stroke="rgba(255,255,255,0.35)"
+                    stroke-width="0.5"
+                    stroke-dasharray="163.36"
+                    stroke-dashoffset="163.36"
+                    stroke-linecap="round"
+                    transform="rotate(-90 30 30)"
+                    id="clock-arc"
+            />
+
+            <!-- Cercle centre -->
+            <circle cx="30" cy="30" r="1.5"
+                    fill="rgba(255,255,255,1)"/>
+
+            <!-- Aiguille secondes (temps réel) -->
+            <line
+                    x1="30" y1="30"
+                    x2="30" y2="10"
+                    stroke="rgba(255,255,255,1)"
+                    stroke-width="0.5"
+                    stroke-linecap="round"
+                    id="clock-seconds"
+            />
+
+            <!-- Aiguille scroll -->
+            <line
+                    x1="30" y1="30"
+                    x2="30" y2="8"
+                    stroke="rgba(255,255,255,0.9)"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                    id="clock-hand"
+            />
+
+            <!-- Glow sur l'aiguille scroll -->
+            <line
+                    x1="30" y1="30"
+                    x2="30" y2="8"
+                    stroke="rgba(255,255,255,0.15)"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    id="clock-hand-glow"
+            />
+
+            <!-- Marques cadran -->
+            <circle cx="30" cy="5" r="1" fill="rgba(255,255,255,0.15)"/>
+            <circle cx="55" cy="30" r="1" fill="rgba(255,255,255,0.15)"/>
+            <circle cx="30" cy="55" r="1" fill="rgba(255,255,255,0.15)"/>
+            <circle cx="5" cy="30" r="1" fill="rgba(255,255,255,0.15)"/>
+        </svg>
+        <span id="clock-section">Intro</span>
+    </div>
+
+    <!-- Contenu -->
+    <slot />
+
+    <script>
+      import Lenis from 'lenis';
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Lenis smooth scroll
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+
+      lenis.on('scroll', ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      gsap.ticker.lagSmoothing(0);
+
+      // Curseur custom
+      const cursor = document.getElementById('cursor');
+      let mouseX = 0, mouseY = 0;
+      let curX = 0, curY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
+      });
+
+      function animateCursor() {
+        curX += (mouseX - curX) * 0.1;
+        curY += (mouseY - curY) * 0.1;
+        cursor.style.left = curX + 'px';
+        cursor.style.top = curY + 'px';
+        requestAnimationFrame(animateCursor);
+      }
+
+      animateCursor();
+
+      // Indicateur horloge
+      const arc = document.getElementById('clock-arc');
+      const hand = document.getElementById('clock-hand');
+      const handGlow = document.getElementById('clock-hand-glow');
+      const secondsHand = document.getElementById('clock-seconds');
+      const clockSection = document.getElementById('clock-section');
+      const clockIndicator = document.getElementById('clock-indicator');
+
+      const sectionLabels = ['Intro', 'Projets', 'About', 'Contact'];
+      const totalLength = 163.36;
+
+      // Apparition
+      setTimeout(() => {
+          clockIndicator.classList.add('is-visible');
+      }, 1500);
+
+      // Aiguille secondes en temps réel
+      function updateSeconds() {
+          const now = new Date();
+          const seconds = now.getSeconds() + now.getMilliseconds() / 1000;
+          const angle = (seconds / 60) * 360 - 90;
+          const rad = (angle * Math.PI) / 180;
+          const x2 = 30 + 20 * Math.cos(rad);
+          const y2 = 30 + 20 * Math.sin(rad);
+          if (secondsHand) {
+              secondsHand.setAttribute('x2', x2);
+              secondsHand.setAttribute('y2', y2);
+          }
+          requestAnimationFrame(updateSeconds);
+      }
+      updateSeconds();
+
+      // Sync scroll
+      lenis.on('scroll', ({ progress }) => {
+          // Arc progression
+          const offset = totalLength - totalLength * progress;
+          arc.style.strokeDashoffset = offset;
+
+          // Aiguille scroll
+          const angle = progress * 360 - 90;
+          const rad = (angle * Math.PI) / 180;
+          const x2 = 30 + 22 * Math.cos(rad);
+          const y2 = 30 + 22 * Math.sin(rad);
+          hand.setAttribute('x2', x2);
+          hand.setAttribute('y2', y2);
+          handGlow.setAttribute('x2', x2);
+          handGlow.setAttribute('y2', y2);
+
+          // Label section
+          const idx = Math.min(
+              Math.floor(progress * sectionLabels.length),
+              sectionLabels.length - 1
+          );
+          clockSection.textContent = sectionLabels[idx];
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>
