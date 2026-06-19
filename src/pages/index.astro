@@ -1,20 +1,267 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Marquee from '../components/Marquee.astro';
-import About from '../components/About.astro';
-import Projects from '../components/Projects.astro';
-import Contact from '../components/Contact.astro';
 ---
 
-<Layout title="Portfolio — Dev & Designer">
-    <Nav/>
-    <main>
-        <Hero />
-        <Marquee />
-        <About />
-        <Projects />
-        <Contact />
-    </main>
+<Layout title="Timothe Pecnard | Portfolio">
+    <div id="grid-container">
+        <main class="strict-grid">
+
+            <div class="cell col-4 flex-between border-bottom">
+                <span class="mono-label">TIMOTHE_PECNARD</span>
+                <span class="mono-label">©2026</span>
+            </div>
+            <div class="cell col-4 flex-center border-bottom">
+                <span class="mono-label">DÉVELOPPEUR & UX/UI</span>
+            </div>
+            <div class="cell col-4 flex-between border-bottom">
+                <span class="mono-label">BLOIS_FR</span>
+                <span class="mono-label accent-text">● DISPONIBLE</span>
+            </div>
+
+            <div class="cell col-12 hero-cell">
+                <h1 class="title-massive">
+                    <span class="line-wrap"><span class="gsap-reveal">FRONT-END</span></span>
+                    <span class="line-wrap"><span class="gsap-reveal align-right accent-text">TO UX_UI.</span></span>
+                </h1>
+            </div>
+
+            <div class="cell col-6 info-cell flex-bottom">
+                <p class="desc-text">
+                    Ancien développeur devenu UX/UI Designer. J’aborde chaque projet avec la logique du code et l’empathie de l’utilisateur. Mon objectif : dessiner des parcours cohérents et concevoir des maquettes qui sont réellement pensées pour être développées.
+                </p>
+            </div>
+            <div class="cell col-3 list-cell">
+                <p class="mono-label mb-1">[ STACK_UX_UI_DEV ]</p>
+                <ul class="strict-list">
+                    <li>UX RESEARCH & WIREFRAMES</li>
+                    <li>UI DESIGN (FIGMA)</li>
+                    <li>FRONT-END (NEXT, ASTRO)</li>
+                    <li>MOTION (GSAP, LENIS)</li>
+                </ul>
+            </div>
+            <div class="cell col-3 flex-bottom flex-right action-cell hover-accent">
+                <a href="/cv-tim-fromentin.pdf" target="_blank" class="huge-link">EXTRAIRE<br/>LE_CV_↗</a>
+            </div>
+
+            <div class="cell col-12 section-divider">
+                <h2 class="section-title">RÉPERTOIRE_DES_TRAVAUX_TECH_&_DESIGN</h2>
+            </div>
+
+            <div class="cell col-1 flex-center bg-number">
+                <span class="index-number">01</span>
+            </div>
+            <div class="cell col-5 project-title-cell flex-col-between">
+                <span class="mono-label">[ ETUDE_01 ]</span>
+                <h3 class="project-name">REFONTE ACIAL</h3>
+                <span class="mono-label text-muted">ALTERNANCE - WORDPRESS & UX-UI</span>
+            </div>
+            <div class="cell col-4 project-desc-cell flex-bottom">
+                <p class="mono-desc">Audit UX global, restructuration de la charte graphique sur Figma et intégration du nouvel écosystème web adaptatif.</p>
+            </div>
+            <div class="cell col-2 flex-center hover-accent">
+                <a href="/projets/acial" class="action-btn">ETUDE_DE_CAS_↗</a>
+            </div>
+
+            <div class="cell col-1 flex-center bg-number">
+                <span class="index-number">02</span>
+            </div>
+            <div class="cell col-5 project-title-cell flex-col-between">
+                <span class="mono-label">[ ETUDE_02 ]</span>
+                <h3 class="project-name">PROJET IOT</h3>
+                <span class="mono-label text-muted">UX-UI - MAQUETTAGE & DEVELOPPEUR FRONT</span>
+            </div>
+            <div class="cell col-4 project-desc-cell flex-bottom">
+                <p class="mono-desc">Transformer la donnée brute de capteurs en interfaces utiles. Création d'un outil métier pour le département et d'une application de découverte pour les visiteurs."</p>
+            </div>
+            <div class="cell col-2 flex-center hover-accent">
+                <a href="/projets/iot" class="action-btn">ETUDE_DE_CAS_↗</a>
+            </div>
+
+            <div class="cell col-1 flex-center bg-number">
+                <span class="index-number">03</span>
+            </div>
+            <div class="cell col-5 project-title-cell flex-col-between">
+                <span class="mono-label">[ ETUDE_03 ]</span>
+                <h3 class="project-name">DASHBOARD VENDEUR</h3>
+                <span class="mono-label text-muted">DEVELOPPEUR FULL_STACK</span>
+            </div>
+            <div class="cell col-4 project-desc-cell flex-bottom">
+                <p class="mono-desc">Application métier full-stack (ERP) : modélisation BDD stricte, module de caisse et datavisualisation sous Laravel et Tailwind.</p>
+            </div>
+            <div class="cell col-2 flex-center hover-accent">
+                <a href="/projets/dashboard" target="_blank" class="action-btn">ETUDE_DE_CAS_↗</a>
+            </div>
+
+            <!-- === SECTION CONTACT === -->
+            <div class="cell col-12 section-divider">
+                <h2 class="section-title">CANAUX_DE_CONTACT</h2>
+            </div>
+
+            <div class="cell col-6 flex-col-between">
+                <span class="mono-label">[ STATUT_OPÉRATIONNEL ]</span>
+                <p class="desc-text" style="margin: 1.5rem 0;">
+                    Actuellement à la recherche d'une alternance pour allier conception UX/UI et intégration Front-End.
+                </p>
+                <span class="mono-label accent-text">● CONTRAT PRO / APPRENTISSAGE</span>
+            </div>
+
+            <div class="cell col-3 flex-bottom flex-right hover-accent">
+                <a href="mailto:ton.email@gmail.com" class="huge-link">ENVOYER<br/>EMAIL_↗</a>
+            </div>
+
+            <div class="cell col-3 flex-bottom flex-right hover-accent">
+                <a href="https://linkedin.com/in/tonprofil" target="_blank" class="huge-link">PROFIL<br/>LINKEDIN_↗</a>
+            </div>
+            <!-- ========================= -->
+
+        </main>
+    </div>
 </Layout>
+
+<script>
+    import gsap from 'gsap';
+    import Lenis from 'lenis';
+
+    const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+    function raf(time: number) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    gsap.fromTo('.gsap-reveal',
+        { y: '110%' },
+        { y: '0%', duration: 1.2, stagger: 0.1, ease: 'power4.out', delay: 0.1 }
+    );
+</script>
+
+<style is:global>
+    :root {
+        --grid-line: #111111;
+        --cell-bg: #fafafa;
+        --text-main: #111111;
+        --accent: #0033ff; /* Bleu Klein Pur */
+    }
+
+    html, body {
+        margin: 0; padding: 0;
+        background-color: var(--cell-bg);
+        color: var(--text-main);
+        font-family: 'Inter', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, p, ul { margin: 0; padding: 0; }
+
+    #grid-container { padding: 1px; background-color: var(--grid-line); min-height: 100vh; }
+    .strict-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1px; background-color: var(--grid-line); }
+
+    /* FIX CRUCIAL : Padding réduit à 1rem pour compacter les cases et éliminer le vide */
+    .cell {
+        background-color: var(--cell-bg);
+        padding: 1.2rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        min-height: 14vh;
+    }
+
+    .col-12 { grid-column: span 12; }
+    .col-6 { grid-column: span 6; }
+    .col-5 { grid-column: span 5; }
+    .col-4 { grid-column: span 4; }
+    .col-3 { grid-column: span 3; }
+    .col-2 { grid-column: span 2; }
+    .col-1 { grid-column: span 1; padding: 1.2rem 0.5rem; }
+
+    @media (max-width: 1024px) {
+        .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 { grid-column: span 12; }
+        .cell { min-height: auto; padding: 1.5rem; }
+    }
+
+    /* ALIGNEMENTS */
+    .flex-between { flex-direction: row; justify-content: space-between; align-items: center; }
+    .flex-center { justify-content: center; align-items: center; text-align: center; }
+    .flex-bottom { justify-content: flex-end; }
+    .flex-right { align-items: flex-end; text-align: right; }
+    .flex-col-between { justify-content: space-between; flex-grow: 1; }
+    .align-right { text-align: right; display: block; }
+    .mb-1 { margin-bottom: 0.5rem; }
+
+    /* TYPOGRAPHIE RETRAVAILLÉE (PLUS GROSSE, PLUS DENSE) */
+    .mono-label {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.95rem;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+    }
+    .text-muted { color: #666; }
+    .accent-text { color: var(--accent); }
+
+    .hero-cell { padding: 6rem 1.2rem; }
+    .title-massive {
+        font-size: clamp(3.8rem, 11.5vw, 12.5rem);
+        font-weight: 900;
+        line-height: 0.8;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+    }
+    .line-wrap { display: block; overflow: hidden; }
+    .gsap-reveal { display: block; }
+
+    .desc-text {
+        font-size: clamp(1.4em, 2.8vw, 1.9rem); /* Augmenté significativement */
+        line-height: 1.3;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        max-width: 900px;
+    }
+
+    .mono-desc {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.15rem; /* Augmenté */
+        line-height: 1.4;
+        font-weight: 700;
+    }
+
+    .strict-list {
+        list-style: none;
+        font-size: 1.4rem; /* Augmenté */
+        font-weight: 800;
+        line-height: 1.6;
+    }
+    .strict-list li { border-bottom: 1px solid #eee; }
+
+    .huge-link { font-size: 2.5rem; font-weight: 900; line-height: 1; text-align: right; }
+
+    .action-btn {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: var(--accent);
+    }
+
+    /* SECTIONS ET PROJETS */
+    .section-divider { background-color: var(--text-main); color: var(--cell-bg); padding: 2rem 1.2rem; justify-content: center; min-height: auto; }
+    .section-title { font-size: 1.8rem; font-weight: 900; letter-spacing: -0.02em; }
+
+    .bg-number { background-color: #fafafa; }
+    .index-number { font-size: 4rem; font-weight: 900; color: #111; }
+
+    .project-name {
+        font-size: 3rem; /* Massif */
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.9;
+        margin: 0.5rem 0;
+    }
+
+    /* HOVERS STRICTS V1 */
+    .hover-invert { cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+    .hover-invert:hover { background-color: var(--text-main); color: var(--cell-bg); }
+
+    .hover-accent { cursor: pointer; transition: background-color 0.2s; }
+    .hover-accent:hover { background-color: var(--accent); }
+    .hover-accent:hover .action-btn,
+    .hover-accent:hover .huge-link { color: #fff; }
+
+</style>
