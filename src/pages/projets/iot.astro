@@ -107,12 +107,12 @@ import Layout from '../../layouts/Layout.astro';
             </div>
 
             <!-- === NAVIGATION INTER-PROJETS === -->
-            <a href="/" class="cell col-6 hover-invert footer-nav-btn nav-align-left">
+            <a href="/" class="cell col-6 hover-accent footer-nav-btn nav-align-left">
                 <span class="title-massive nav-text"><span class="arrow-flip">↗</span>_RETOUR_INDEX</span>
             </a>
 
-            <a href="/projets/acial" class="cell col-6 hover-accent footer-nav-btn nav-align-right">
-                <span class="title-massive nav-text">SUIVANT:_ACIAL_↗</span>
+            <a href="/projets/dashboard" class="cell col-6 hover-accent footer-nav-btn nav-align-right">
+                <span class="title-massive nav-text">SUIVANT: DASHOBARD_↗</span>
             </a>
 
         </main>
@@ -120,47 +120,23 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <style>
-    #grid-container {
-        --grid-line: #111111;
-        --cell-bg: #fafafa;
-        --text-main: #111111;
-        --accent: #0033ff;
-        padding: 1px;
-        background-color: var(--grid-line);
-        color: var(--text-main);
-    }
-
-    a { text-decoration: none; color: inherit; }
-    h1, h3, p { margin: 0; padding: 0; }
-
-    .strict-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1px; background-color: var(--grid-line); }
-
-    .cell { background-color: var(--cell-bg); padding: 1.5rem; box-sizing: border-box; display: flex; flex-direction: column; }
-    .col-12 { grid-column: span 12; }
-    .col-6 { grid-column: span 6; }
-    .col-3 { grid-column: span 3; }
-
-    .flex-between { flex-direction: row; justify-content: space-between; align-items: center; }
-    .flex-right { flex-direction: row; justify-content: flex-end; align-items: center; }
-    .flex-col-between { justify-content: space-between; }
-    .flex-center { justify-content: center; align-items: center; text-align: center; }
-    .align-right { text-align: right; display: block; }
-
-    .bg-number { background-color: #eeeeee; }
-
-    /* SPLIT SECTION */
     .split-section {
         padding: 0;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1px;
-        background-color: var(--grid-line);
+        background-color: var(--grid-line); /* Ramène la bordure centrale */
     }
 
-    .split-left { background-color: var(--grid-line); display: flex; flex-direction: column; gap: 1px; }
+    .split-left {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background-color: var(--grid-line); /* Ramène les bordures horizontales */
+    }
 
     .content-block {
-        background-color: var(--cell-bg);
+        background-color: var(--bg-color); /* Rend la case blanche */
         padding: 6rem 4rem;
         min-height: 50vh;
         display: flex;
@@ -170,101 +146,25 @@ import Layout from '../../layouts/Layout.astro';
 
     .context-block { min-height: 35vh; }
 
-    /* STICKY VISUALS CLEAN */
-    .split-right { background-color: var(--cell-bg); position: relative; }
-
-    .sticky-wrapper {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        box-sizing: border-box;
+    .split-right {
+        background-color: var(--bg-color); /* Rend la case droite blanche */
+        position: relative;
     }
+    .sticky-wrapper { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
 
-    .visual-container {
-        position: absolute;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        height: 80%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        z-index: 1;
-    }
+    .visual-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 80%; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; z-index: 1; }
+    .visual-container.active { opacity: 1; visibility: visible; z-index: 2; }
 
-    .visual-container.active {
-        opacity: 1;
-        visibility: visible;
-        z-index: 2;
-    }
-
-    /* QUALITÉ ORIGINALE NETTE */
-    .project-img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        display: block;
-    }
-
-    /* TYPO & RESPONSIVE */
-    .mono-label { font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; }
-    .accent-text { color: var(--accent); }
-
-    .hero-cell { padding: 6rem 2rem; }
-    .title-massive { font-size: clamp(3rem, 10vw, 10rem); font-weight: 900; line-height: 0.8; letter-spacing: -0.05em; text-transform: uppercase; }
-    .line-wrap { display: block; overflow: hidden; }
-    .gsap-reveal { display: block; }
-
-    .project-name { font-size: 3rem; font-weight: 900; letter-spacing: -0.04em; margin: 1rem 0; }
-    .desc-text { font-size: 1.5rem; font-weight: 600; line-height: 1.3; }
-    .mono-desc { font-family: 'Courier New', Courier, monospace; font-size: 1.05rem; color: #555; line-height: 1.5; }
-    .meta-value { font-size: 1.2rem; font-weight: 700; margin-top: 0.5rem; }
+    .project-img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
 
     @media (max-width: 1024px) {
         .split-section { grid-template-columns: 1fr; }
         .sticky-wrapper { height: 50vh; position: relative; }
         .visual-container { width: 100%; height: 90%; }
-        .col-md-6 { grid-column: span 6; }
         .content-block { padding: 4rem 2rem; }
     }
-
-    /* HOVERS CIBLÉS */
-    .hover-invert:hover { background-color: var(--text-main); color: var(--cell-bg); cursor: pointer; }
-
-    .hover-accent { transition: background-color 0.2s; cursor: pointer; }
-    .hover-accent:hover { background-color: var(--accent); }
-    .hover-accent:hover .mono-label,
-    .hover-accent:hover .meta-value,
-    .hover-accent:hover .nav-text { color: var(--cell-bg); }
-
-    /* FOOTER NAVIGATION */
-    .footer-nav-btn {
-        padding: 5rem 2rem;
-        transition: background-color 0.3s, color 0.3s;
-        justify-content: center;
-    }
-
-    .nav-align-left { align-items: flex-start; text-align: left; }
-    .nav-align-right { align-items: flex-end; text-align: right; }
-
-    .nav-text {
-        font-size: clamp(1.8rem, 4vw, 4rem);
-        letter-spacing: -0.04em;
-    }
-
-    /* FLÈCHE INVERSÉE */
-    .arrow-flip {
-        display: inline-block;
-        transform: rotate(-90deg);
-    }
 </style>
+
 
 <script>
     import gsap from 'gsap';

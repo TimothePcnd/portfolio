@@ -12,19 +12,17 @@ const { title = 'Tim Fromentin — UX & Dev' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <!-- Tes polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<slot /> <!-- C'est ici que tes pages viendront s'injecter -->
+<slot />
 
 <script>
     import Lenis from 'lenis';
 
-    // Smooth Scroll minimaliste et infaillible
     const lenis = new Lenis({
         duration: 1.2,
     });
@@ -39,20 +37,17 @@ const { title = 'Tim Fromentin — UX & Dev' } = Astro.props;
 </html>
 
 <style is:global>
-    /* === LE SEUL CSS GLOBAL DU SITE === */
-
+    /* =========================================
+       1. VARIABLES & RESET
+    ========================================= */
     :root {
         --bg-color: #fafafa;
         --text-color: #111111;
-        --grid-line: #e5e5e5;
+        --grid-line: #111111; /* Ligne noire pour la grille brutaliste */
         --accent: #0033ff;
     }
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
         background-color: var(--bg-color);
@@ -62,13 +57,108 @@ const { title = 'Tim Fromentin — UX & Dev' } = Astro.props;
         overflow-x: hidden;
     }
 
-    a {
-        text-decoration: none;
-        color: inherit;
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, p { margin: 0; padding: 0; }
+
+    /* Configuration Lenis */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+
+    /* =========================================
+       2. GRILLE BRUTALISTE GLOBALE
+    ========================================= */
+    #grid-container { padding: 1px; background-color: var(--grid-line); }
+    .strict-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1px; background-color: var(--grid-line); }
+
+    .cell {
+        background-color: var(--bg-color);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
     }
 
-    /* Configuration obligatoire pour Lenis */
-    html.lenis, html.lenis body { height: auto; }
-    .lenis.lenis-smooth { scroll-behavior: auto !important; }
-    .lenis.lenis-stopped { overflow: hidden; }
+    .col-12 { grid-column: span 12; }
+    .col-6 { grid-column: span 6; }
+    .col-3 { grid-column: span 3; }
+
+    /* Flex Utilities */
+    .flex-between { flex-direction: row; justify-content: space-between; align-items: center; }
+    .flex-right { flex-direction: row; justify-content: flex-end; align-items: center; }
+    .flex-col-between { justify-content: space-between; }
+    .align-right { text-align: right; display: block; }
+
+
+    /* =========================================
+       3. TYPOGRAPHIE
+    ========================================= */
+    .mono-label { font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; }
+    .accent-text { color: var(--accent); }
+
+    .title-massive { font-size: clamp(3rem, 10vw, 10rem); font-weight: 900; line-height: 0.8; letter-spacing: -0.05em; text-transform: uppercase; }
+    .project-name { font-size: 3rem; font-weight: 900; letter-spacing: -0.04em; margin: 1rem 0; }
+
+    .desc-text { font-size: 1.5rem; font-weight: 600; line-height: 1.3; }
+    .mono-desc { font-family: 'Courier New', Courier, monospace; font-size: 1.1rem; color: #555; line-height: 1.5; font-weight: lighter }
+    .meta-value { font-size: 1.2rem; font-weight: 700; margin-top: 0.5rem; }
+
+    .line-wrap { display: block; overflow: hidden; }
+    .gsap-reveal { display: block; }
+
+
+    /* =========================================
+       4. EFFETS DE SURVOL (HOVERS)
+    ========================================= */
+    .bg-number { background-color: #eeeeee; }
+
+    .hover-invert:hover { background-color: var(--text-color); color: var(--bg-color); cursor: pointer; }
+
+    .hover-accent { transition: background-color 0.2s; cursor: pointer; }
+    .hover-accent:hover { background-color: var(--accent); color: var(--bg-color); }
+    .hover-accent:hover * { color: var(--bg-color); }
+
+
+    /* =========================================
+       5. FOOTER NAVIGATION & RESPONSIVE
+    ========================================= */
+    .footer-nav-btn {
+        padding: 5rem 2rem;
+        transition: background-color 0.3s, color 0.3s;
+        justify-content: center;
+    }
+
+    .nav-align-left { align-items: flex-start; text-align: left; }
+    .nav-align-right { align-items: flex-end; text-align: right; }
+    .arrow-flip { display: inline-block; transform: rotate(-90deg); }
+
+    .nav-text {
+        font-size: clamp(1rem, 3.5vw, 7rem);
+        font-weight: 900;
+        line-height: 0.8;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    /* Breakpoints (Tablette & Mobile) */
+    @media (max-width: 1024px) {
+        .col-md-6 { grid-column: span 6; }
+    }
+
+    @media (max-width: 768px) {
+        /* LABELS HEADER */
+        .flex-between {
+            flex-direction: column ;
+            align-items: flex-start ;
+            gap: 0.5rem;
+        }
+
+        .footer-nav-btn {
+            padding: 1.5rem 0.5rem; /* Réduction des marges pour laisser la place au texte */
+        }
+        .nav-text {
+            font-size: clamp(1rem, 4vw, 1.5rem); /* Texte plus petit sur smartphone */
+        }
+    }
 </style>
