@@ -22,28 +22,7 @@ body {
     cursor: none; /* Curseur custom */
 }
 
-/* Curseur custom */
-#cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 10px;
-    height: 10px;
-    background: var(--color-text);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s var(--ease-out),
-    height 0.3s var(--ease-out),
-    background 0.3s;
-    mix-blend-mode: difference;
-}
 
-#cursor.is-hovering {
-    width: 48px;
-    height: 48px;
-}
 
 /* Sélection */
 ::selection {
