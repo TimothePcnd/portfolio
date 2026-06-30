@@ -34,8 +34,8 @@ import Layout from '../../layouts/Layout.astro';
                 <p class="meta-value">Commerce / Marketing / BE</p>
             </div>
             <div class="cell col-3 col-md-6 flex-col-between bg-number hover-accent">
-                <p class="mono-label accent-text">[ LIEN ]</p>
-                <a href="https://www.acial.fr" target="_blank" class="meta-value full-link">ACIAL.FR_↗</a>
+                <p class="mono-label accent-text">[ LIEN - Site non déployé ]</p>
+                <a href="#" target="_blank" class="meta-value full-link">ACIAL.FR_↗</a>
             </div>
 
             <div class="cell col-12 split-section">
@@ -57,7 +57,7 @@ import Layout from '../../layouts/Layout.astro';
                         </p>
                     </div>
 
-                    <div class="content-block step-block" data-image="2">
+                    <div class="content-block step-block" data-image="1">
                         <span class="mono-label accent-text">[ 02 / DIRECTION ARTISTIQUE ]</span>
                         <h3 class="project-name">Force de proposition.</h3>
                         <p class="mono-desc">
@@ -65,7 +65,7 @@ import Layout from '../../layouts/Layout.astro';
                         </p>
                     </div>
 
-                    <div class="content-block step-block" data-image="3">
+                    <div class="content-block step-block" data-image="2">
                         <span class="mono-label accent-text">[ 03 / DÉVELOPPEMENT ]</span>
                         <h3 class="project-name">Intégration.</h3>
                         <p class="mono-desc">
@@ -73,7 +73,7 @@ import Layout from '../../layouts/Layout.astro';
                         </p>
                     </div>
 
-                    <div class="content-block step-block" data-image="4">
+                    <div class="content-block step-block" data-image="2">
                         <span class="mono-label accent-text">[ 04 / BILAN ]</span>
                         <h3 class="project-name">Livrable validé.</h3>
                         <p class="mono-desc">
@@ -93,24 +93,10 @@ import Layout from '../../layouts/Layout.astro';
                 <div class="split-right">
                     <div class="sticky-wrapper">
                         <div class="visual-container active" id="img-1">
-                            <div class="visual-inner">
-                                <span class="mono-label">[ FIGMA_WIREFRAMES ]</span>
-                            </div>
+                            <img src="/rayonnage-acial.png" alt="Page produit rayonnage" class="project-img" />
                         </div>
                         <div class="visual-container" id="img-2">
-                            <div class="visual-inner" style="background-color: #222; border-color: #555;">
-                                <span class="mono-label" style="color: #fff;">[ DESIGN_ASSETS ]</span>
-                            </div>
-                        </div>
-                        <div class="visual-container" id="img-3">
-                            <div class="visual-inner" style="background-color: var(--accent); border-color: transparent;">
-                                <span class="mono-label" style="color: #fff;">[ WORDPRESS_PROD ]</span>
-                            </div>
-                        </div>
-                        <div class="visual-container" id="img-4">
-                            <div class="visual-inner" style="background-color: #111; border-color: #333;">
-                                <span class="mono-label" style="color: #fafafa;">[ STATUS_READY_TO_DEPLOY ]</span>
-                            </div>
+                            <img src="/atelier-acial.png" alt="Page gamme mobilier d'atelier" class="project-img" />
                         </div>
                     </div>
                 </div>
@@ -129,9 +115,8 @@ import Layout from '../../layouts/Layout.astro';
         </main>
     </div>
 </Layout>
-
 <style>
-        /* SPLIT SECTION (Scroll) - AVEC LES COULEURS DE FOND */
+    /* SPLIT SECTION (Scroll) */
     .split-section {
         padding: 0;
         display: grid;
@@ -182,16 +167,23 @@ import Layout from '../../layouts/Layout.astro';
         width: 80%;
         height: 70%;
         opacity: 0;
-        transition: opacity 0.5s ease-in-out;
+        visibility: hidden;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s;
         z-index: 1;
     }
 
-    .visual-container.active { opacity: 1; z-index: 2; }
+    .visual-container.active {
+        opacity: 1;
+        visibility: visible;
+        z-index: 2;
+    }
 
-    .visual-inner {
-        width: 100%; height: 100%;
-        background-color: #f0f0f0; border: 1px dashed #ccc;
-        display: flex; align-items: center; justify-content: center;
+    /* 👇 LE CSS MANQUANT POUR LES IMAGES 👇 */
+    .project-img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
     }
 
     @media (max-width: 1024px) {
@@ -202,42 +194,48 @@ import Layout from '../../layouts/Layout.astro';
     }
 </style>
 
-
 <script>
     import gsap from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    // Lenis est géré globalement dans Layout.astro
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener('astro:page-load', () => {
-        // 1. Reveal Hero
+    function initScrollImages() {
+        // Animation du titre
         gsap.fromTo('.gsap-reveal',
             { y: '110%' },
             { y: '0%', duration: 1, stagger: 0.1, ease: 'power4.out', delay: 0.1 }
         );
 
-        // 2. Logic: Switch Images on Scroll
-        const blocks = gsap.utils.toArray('.content-block');
+        // Système de détection au scroll (Identique à iot.astro)
+        const blocks = document.querySelectorAll('.content-block');
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -30% 0px',
+            threshold: 0
+        };
 
-        blocks.forEach((block: any) => {
-            const imgId = block.getAttribute('data-image');
-
-            ScrollTrigger.create({
-                trigger: block,
-                start: "top center",
-                end: "bottom center",
-                onEnter: () => switchImage(imgId),
-                onEnterBack: () => switchImage(imgId)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const imgId = entry.target.getAttribute('data-image');
+                    if (imgId) {
+                        document.querySelectorAll('.visual-container').forEach(img => {
+                            img.classList.remove('active');
+                        });
+                        const target = document.getElementById(`img-${imgId}`);
+                        if (target) {
+                            target.classList.add('active');
+                        }
+                    }
+                }
             });
-        });
+        }, observerOptions);
 
-        function switchImage(id: string) {
-            document.querySelectorAll('.visual-container').forEach(img => {
-                img.classList.remove('active');
-            });
-            const target = document.getElementById(`img-${id}`);
-            if (target) target.classList.add('active');
-        }
-    });
+        blocks.forEach(block => observer.observe(block));
+    }
+
+    // Lancement multi-cas pour éviter les bugs avec Astro View Transitions
+    document.addEventListener('DOMContentLoaded', initScrollImages);
+    document.addEventListener('astro:page-load', initScrollImages);
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        initScrollImages();
+    }
 </script>
